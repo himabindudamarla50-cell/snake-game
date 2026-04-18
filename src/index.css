@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'VT323', monospace;
+  --color-neo-cyan: #00ffff;
+  --color-neo-magenta: #ff00ff;
+  --color-neo-black: #050505;
+}
+
+body {
+  background-color: var(--color-neo-black);
+  color: var(--color-neo-cyan);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+body::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 50;
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 0.90; }
+  100% { opacity: 0.98; }
+}
+
+.glitch-container {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.8;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.glitch-cyan {
+  color: #00ffff;
+  transform: translate(-2px, 1px);
+  animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+  z-index: -1;
+  text-shadow: 2px 0 #ff00ff;
+}
+
+.glitch-magenta {
+  color: #ff00ff;
+  transform: translate(2px, -1px);
+  animation: glitch-anim-2 3s infinite linear alternate-reverse;
+  z-index: -2;
+  text-shadow: -2px 0 #00ffff;
+}
+
+@keyframes glitch-anim-1 {
+  0%, 100% { clip-path: inset(50% 0 30% 0); }
+  20% { clip-path: inset(15% 0 65% 0); transform: translate(-3px, 2px); }
+  40% { clip-path: inset(80% 0 10% 0); }
+  60% { clip-path: inset(40% 0 50% 0); transform: translate(3px, -2px); }
+  80% { clip-path: inset(10% 0 70% 0); }
+}
+
+@keyframes glitch-anim-2 {
+  0%, 100% { clip-path: inset(40% 0 40% 0); }
+  20% { clip-path: inset(60% 0 10% 0); transform: translate(3px, -2px); }
+  40% { clip-path: inset(20% 0 70% 0); }
+  60% { clip-path: inset(80% 0 5% 0); transform: translate(-3px, 2px); }
+  80% { clip-path: inset(5% 0 80% 0); }
+}
